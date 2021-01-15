@@ -28,14 +28,13 @@ const App = () => {
     }
  }
 
- const updateInput = async (input) => {
+ const updateInput = async () => {
    const results = group.filter(search => {
-     return search.Gender.toLowerCase().includes(input)
-    
+     return search.Gender.toLowerCase() === input
   })
     setInput(input)
     setSearchResults(results)
-    console.log(results);
+    console.log(results, group, input);
  }
  
  useEffect(() => {
@@ -52,7 +51,7 @@ const App = () => {
   
   
   const paginate = pageNumber => setCurrentPage(pageNumber)
-   
+  
   
   if (loading) {
       return (
@@ -64,7 +63,8 @@ const App = () => {
     return (
       <main>
         <SearchBar keyword={input} setKeyword={setInput}/>
-        <Record record={searchResults} />
+        {searchResults.length > 0 ? <Record record={searchResults} /> : <Record record={currentPosts} />}
+        
         <Pagination postPerPage={postPerPage} totalPosts={group.length} paginate={paginate}/>
       </main>
     )
