@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import Filter from './Filter';
 import Loading from './Loading';
 import Pagination from './Pagination'
 import Record from './Recordss';
@@ -30,7 +31,21 @@ const App = () => {
 
  const updateInput = async () => {
    const results = group.filter(search => {
-     return search.Gender.toLowerCase() === input
+     return search.Gender.toLowerCase() === input || 
+            search.FirstName.toLowerCase() === input || 
+            search.LastName.toLowerCase() === input || 
+            search.Latitude === input || 
+            search.Longitude === input || 
+            search.CreditCardNumber.toLowerCase() === input || 
+            search.CreditCardType.toLowerCase() === input || 
+            search.Email.toLowerCase() === input || 
+            search.DomainName.toLowerCase() === input || 
+            search.PhoneNumber === input || 
+            search.MacAddress.toLowerCase() === input || 
+            search.URL.toLowerCase() === input || 
+            search.LastLogin.toLowerCase() === input || 
+            search.PaymentMethod.toLowerCase() === input 
+            
   })
     setInput(input)
     setSearchResults(results)
@@ -62,6 +77,7 @@ const App = () => {
   } 
     return (
       <main>
+        <Filter />
         <SearchBar keyword={input} setKeyword={setInput}/>
         {searchResults.length > 0 ? <Record record={searchResults} /> : <Record record={currentPosts} />}
         
